@@ -1,46 +1,54 @@
-import { Injectable } from '@angular/core';
+import { Injectable, } from '@angular/core';
 import { users } from '../body/login/mock-listItems'
 import { user } from '../body/login/listItem';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CheckCookieService {
-//define diffrent variables
+
+export class login {
+  constructor(private location: Location) { }
+
+  // allMessagesFinal: message[] = allMessages;
   cookieTrue = false;
   cookie = document.cookie;
-  objIndex;
+  objCol: any;
   loggedIn: boolean = false;
-  users: user[] = users;
+  users: user[] = users; 
 
-//check if cookie is the correct value
+//sets cookie and start counter (countMax is the time)
+  setCookie() {
+    var date = new Date();
+    var cookiename = "Title";
+    var timeToExpireSeconds = 300;
+    var cookieValue = "CookieValueeeeee";
+    date.setTime(date.getTime() + (timeToExpireSeconds * 1000));
+    document.cookie = cookiename + "=" + cookieValue + "; expires=" + date;
+    return true;
+  }
+
+  //checks if cookie is set
   checkCookie() {
     if (this.cookie === "Title=CookieValueeeeee") {
-      //After how many seconds you have to login again
-      var countMax: number = 3;
-
-      //Deletes cookie after Countmax is 0
+      var countMax: number = 2000;
       function deleteAllCookies() {
         var mydate = new Date();
         mydate.setTime(mydate.getTime() - 1);
         document.cookie = "username=; expires=" + mydate.toUTCString();
         alert("You have been logged out. \n Please login again");
       }
-
-      //counter to get countMax to 0
       var Timer = setInterval(function () {
         countMax--;
         console.log(countMax);
         if (countMax <= 0) {
           clearInterval(Timer);
+          this.mydate = this.mydate;
           deleteAllCookies();
-          countMax = 3;
           this.loggedIn = false;
           location.replace("./login")
         }
       }, 1000);
-
-
       return this.loggedIn = true;
     }
     else{
@@ -48,14 +56,14 @@ export class CheckCookieService {
     }
   }
 
-//checks username from formData
+  //checks if username is correct
   checkUnamePasswd(uName: string, pWord: string) {
     return this.users.some(function (el) {
       return el.username === uName && el.password === pWord
     })
   }
 
-//checks if user is Admin
+  //checks if user is admin
   checkIfAdmin(uName: string) {
     const row = this.findItemInObject(users, 'username', uName);
     if (row.admin === true) {
@@ -66,17 +74,17 @@ export class CheckCookieService {
     }
   }
 
-//Sets user to Logged In
+  //sets user to loggedIn
   setLoggedIn(uName: string) {
-    this.objIndex = users.findIndex((obj => obj.username == uName));
-    users[this.objIndex].loggedIn = true;
+    this.objCol = users.findIndex((obj => obj.username == uName));
+    users[this.objCol].loggedIn = true;
     return true
   }
 
-//checks if user is Logged In
+  //checks if user is loggedIn
   checkIfLogedIn(uName: string) {
     const row = this.findItemInObject(users, 'username', uName);
-    this.objIndex = users.findIndex((obj => obj.username == uName));
+    this.objCol = users.findIndex((obj => obj.username == uName));
     if (row.loggedIn === true) {
       return true;
     }
@@ -85,7 +93,7 @@ export class CheckCookieService {
     }
   }
 
-//Finds Row in object where value is in array
+  //Finds row in array where value = imprted value
   findItemInObject(array: any, key: string, value: any) {
     for (var i = 0; i < array.length; i++) {
       if (array[i][key] === value) {
@@ -95,5 +103,9 @@ export class CheckCookieService {
     return null;
   }
 
+  //Location back
 
+  back() {
+    return this.location.back();
+  }
 }

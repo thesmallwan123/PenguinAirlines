@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { users } from './mock-listItems';
 import { user } from './listItem';
-import { CheckCookieService } from '../../services/login.service';
-import { Location } from '@angular/common';
+import { login } from '../../services/login-cookie';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,9 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('form', { static: false}) form: NgForm;
-  constructor(private checkCookieService: CheckCookieService, private _location: Location) { }
+  constructor(
+    private login: login, 
+  ) { }
 
 
 
@@ -27,43 +28,27 @@ export class LoginComponent implements OnInit {
 formulier = {username:'', password: '',};
 
 users: user[] = users;
-  onSubmit(){
+  loginButton(){
     const username = this.form.value.username;
     const password = this.form.value.password;
-    if (this.checkCookieService.checkUnamePasswd(username, password) === true){
-      if (this.checkCookieService.checkIfAdmin(username) === true){
-        if (this.setCookie() === true) {
-          this.checkCookieService.checkCookie();
-          this.checkCookieService.setLoggedIn(username);
-          return this._location.back()
+    if (this.login.checkUnamePasswd(username, password) === true){
+      if (this.login.checkIfAdmin(username) === true){
+        if (this.login.setCookie() === true) {
+          if (this.login.checkCookie() == true){
+            this.login.setLoggedIn(username);
+            this.login.back();
+          }
         }
         else{
           console.log(Error)
         }
       }
       else {
-        return this._location.back()
+        this.login.back();
       }
     }
     else{
       alert("Please fill in the correct user credentials")
     }
   }
-
-
-
-
-
-
-  setCookie() {
-    var date = new Date();
-    var cookiename = "Title";
-    var timeToExpireSeconds = 300;
-    var cookieValue = "CookieValueeeeee";
-    date.setTime(date.getTime() + (timeToExpireSeconds * 1000));
-    document.cookie = cookiename + "=" + cookieValue + "; expires=" + date;
-    return true
-  }
-
-
 }
