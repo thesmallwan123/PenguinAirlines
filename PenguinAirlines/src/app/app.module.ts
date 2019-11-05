@@ -14,6 +14,12 @@ import { MyTravelsComponent } from './body/my-travels/my-travels.component';
 import { CreateUserComponent } from './body/login/create-user/create-user.component';
 import { FlightFormComponent } from './body/flight-form/flight-form.component';
 
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material/';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +36,15 @@ import { FlightFormComponent } from './body/flight-form/flight-form.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    
+    MatButtonModule,
+    MatCardModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
