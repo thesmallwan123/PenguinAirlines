@@ -1,1 +1,11 @@
-<p>navigation works!</p>
+<nav class="navBar mat-elevation-z8">
+    <ul class="navList">
+        <li *ngFor="let NavItem of navItemLeft" class="navItem">
+            <button mat-raised-button color="primary" routerLink='{{NavItem.url}}' class="navItemLink">{{NavItem.name}}
+            </button>
+        </li>
+        <li *ngFor="let NavItem of navItemRight" class="navItem">
+            <a mat-raised-button color="primary" class="navItemLink" routerLink='{{NavItem.url}}'>{{NavItem.name}}</a>
+        </li>
+    </ul>
+</nav>
