@@ -1,0 +1,17 @@
+.FormBody{
+    display: flex;
+    flex-direction: column;
+}
+.form{
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
+.buttons{
+    display: flex;
+    justify-content: space-around;
+}
+.button{
+    position: absolute;
+    right: 10%;
+}

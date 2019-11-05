@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { login } from './services/login-cookie';
+import { login } from './services/login-cookie.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

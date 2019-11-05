@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material/';
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatCheckboxModule } from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +46,7 @@ import { FlightFormComponent } from './body/flight-form/flight-form.component';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

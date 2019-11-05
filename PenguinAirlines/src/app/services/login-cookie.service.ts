@@ -17,21 +17,31 @@ export class login {
   loggedIn: boolean = false;
   users: user[] = users; 
 
+  uName;
+  pWord;
+
 //sets cookie and start counter (countMax is the time)
   setCookie() {
     var date = new Date();
     var cookiename = "Title";
-    var timeToExpireSeconds = 300;
+    var timeToExpireSeconds = 40;
     var cookieValue = "CookieValueeeeee";
     date.setTime(date.getTime() + (timeToExpireSeconds * 1000));
     document.cookie = cookiename + "=" + cookieValue + "; expires=" + date;
     return true;
   }
-
+  checkCounter(){
+  if (this.loggedIn === true){
+      return false;
+    } 
+    else{
+      return true
+    }
+  }
   //checks if cookie is set
   checkCookie() {
     if (this.cookie === "Title=CookieValueeeeee") {
-      var countMax: number = 2000;
+      var countMax: number = 40;
       function deleteAllCookies() {
         var mydate = new Date();
         mydate.setTime(mydate.getTime() - 1);
@@ -58,14 +68,16 @@ export class login {
 
   //checks if username is correct
   checkUnamePasswd(uName: string, pWord: string) {
+    this.uName = uName;
+    this.pWord = pWord;
     return this.users.some(function (el) {
       return el.username === uName && el.password === pWord
     })
   }
 
   //checks if user is admin
-  checkIfAdmin(uName: string) {
-    const row = this.findItemInObject(users, 'username', uName);
+  checkIfAdmin() {
+    const row = this.findItemInObject(users, 'username', this.uName);
     if (row.admin === true) {
       return true;
     }
@@ -75,16 +87,16 @@ export class login {
   }
 
   //sets user to loggedIn
-  setLoggedIn(uName: string) {
-    this.objCol = users.findIndex((obj => obj.username == uName));
+  setLoggedIn() {
+    this.objCol = users.findIndex((obj => obj.username == this.uName));
     users[this.objCol].loggedIn = true;
     return true
   }
 
   //checks if user is loggedIn
-  checkIfLogedIn(uName: string) {
-    const row = this.findItemInObject(users, 'username', uName);
-    this.objCol = users.findIndex((obj => obj.username == uName));
+  checkIfLogedIn() {
+    const row = this.findItemInObject(users, 'username', this.uName);
+    this.objCol = users.findIndex((obj => obj.username == this.uName));
     if (row.loggedIn === true) {
       return true;
     }

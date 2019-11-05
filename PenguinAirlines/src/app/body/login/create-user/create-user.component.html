@@ -1,1 +1,39 @@
-<p>create-user works!</p>
+<button mat-raised-button class="button" color="accent" routerLink='/login'>Cancel</button>
+<form (ngSubmit)="create()" #form="ngForm" class="form">
+    <h1>Register</h1>
+    <div class="FormBody">
+        <mat-form-field>
+            <mat-label>Username:</mat-label>
+            <input matInput ngModel type="text" name="username" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>password:</mat-label>
+            <input matInput ngModel type="text" name="password" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input matInput ngModel type="text" name="passwordConfirm" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input matInput ngModel type="text" name="email" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput ngModel type="text" name="firstName" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Last name</mat-label>
+            <input matInput ngModel type="text" name="lastName" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Date of birth</mat-label>
+            <input matInput ngModel type="text" name="dateOfBirth" />
+        </mat-form-field>
+        <div class="buttons">
+            <button mat-raised-button color="primary">Send</button>
+            <button mat-raised-button color="warn" type="reset">Reset</button>
+        </div>
+
+    </div>
+</form>

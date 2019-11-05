@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { login } from './login-cookie';
+import { login } from './login-cookie.service';
 
 describe('CheckCookieService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
