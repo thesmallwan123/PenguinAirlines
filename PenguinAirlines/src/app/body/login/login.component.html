@@ -1,4 +1,4 @@
-<button *ngIf="cookieTrue" mat-raised-button class="button" color="accent" routerLink='/create-user'>Create new User</button>
+<button *ngIf="isAdmin" mat-raised-button class="button" color="accent" routerLink='/create-user'>Create new User</button>
 <form (ngSubmit)="loginButton()" #form="ngForm" class="form">
     <h1>Login</h1>
     <div class="FormBody">

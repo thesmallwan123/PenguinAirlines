@@ -24,10 +24,11 @@ export class LoginComponent implements OnInit {
 
 
 cookieTrue = false;
+isAdmin = false;
   ngOnInit() {
-    if (this.login.checkIfLogedIn() == true) {
-      this.cookieTrue = true;
-    }
+    this.cookieTrue = this.login.checkIfLogedIn()
+    this.isAdmin = this.login.checkIfAdmin();
+
   }
 
 formulier = {username:'', password: '',};
@@ -38,26 +39,16 @@ users: user[] = users;
     const password = this.form.value.password;
     if (this.login.checkCounter() === true){ 
       if (this.login.checkUnamePasswd(username, password) === true){
-        if (this.login.checkIfAdmin() === true){
-          if (this.login.setCookie() === true) {
-            if (this.login.checkCookie() == true){
-              this.login.setLoggedIn();
-              this.login.back();
-            }
-          }
-          else{
-            console.log(Error)
-          }
-        }
-        else {
-          this.login.back();
-        }
+        this.login.setLoggedIn();
+        this.login.setCookie();
+        this.login.checkCookie();
+        this.login.back();
       }
-      else{
+      else {
         alert("Please fill in the correct user credentials")
-      }
+      } 
     }
-    else{
+    else {
       alert("Already logged in")
     }
   }
