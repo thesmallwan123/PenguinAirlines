@@ -19,8 +19,8 @@ export class CreateUserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.login.checkIfAdmin()){
-      
+    if(this.login.checkIfAdmin() == false){
+      this.login.back();
     }
   }
 

@@ -11,14 +11,15 @@ export class login {
   constructor(private location: Location) { }
 
   // allMessagesFinal: message[] = allMessages;
+
   cookieTrue = false;
   cookie = document.cookie;
   objCol: any;
   loggedIn: boolean = false;
   users: user[] = users; 
 
-  uName;
-  pWord;
+  uName = 'noadmin';
+  pWord = '';
 
 //sets cookie and start counter (countMax is the time)
   setCookie() {
@@ -40,7 +41,7 @@ export class login {
   }
   //checks if cookie is set
   checkCookie() {
-    if (this.cookie === "Title=CookieValueeeeee") {
+    if (this.cookie === "Title=CookieValueeeeee" /* Chrome */ || this.cookie === "PHPSESSID=o1fpk2vjgsapts0epmf168ckf5; Title=CookieValueeeeee" /* Firefox */) {
       var countMax: number = 40;
       function deleteAllCookies() {
         var mydate = new Date();
@@ -62,7 +63,7 @@ export class login {
       return this.loggedIn = true;
     }
     else{
-      console.log("please login")
+      console.log(this.cookie)
     }
   }
 
@@ -116,7 +117,6 @@ export class login {
   }
 
   //Location back
-
   back() {
     return this.location.back();
   }

@@ -5,4 +5,7 @@ export class user {
     password: string;
     email: string;
     loggedIn: boolean;
+    firstName: string;
+    lastName: string;
+    DOB: string;
 }
