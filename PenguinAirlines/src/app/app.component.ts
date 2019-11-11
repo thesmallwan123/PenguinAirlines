@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { login } from './services/login-cookie.service';
+import { loginService } from './services/login-cookie.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,6 +7,6 @@ import { login } from './services/login-cookie.service';
 })
 export class AppComponent implements OnInit {
   title = 'PenguinAirlines';
-  constructor(private login: login,) { }
+  constructor(private login: loginService,) { }
   ngOnInit(){}
 }

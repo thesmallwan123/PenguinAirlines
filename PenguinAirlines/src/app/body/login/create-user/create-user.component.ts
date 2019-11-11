@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CreateUserService } from '../../../services/create-user.service';
 import { Location } from '@angular/common';
-import { login } from '../../../services/login-cookie.service';
+import { loginService } from '../../../services/login-cookie.service';
 
 @Component({
   selector: 'app-create-user',
@@ -14,7 +14,7 @@ export class CreateUserComponent implements OnInit {
   @ViewChild('form', { static: false }) form: NgForm;
   constructor(
     private createUser: CreateUserService,
-    private login: login,
+    private login: loginService,
     private location: Location,
   ) { }
 

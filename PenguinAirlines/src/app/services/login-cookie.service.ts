@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
   providedIn: 'root'
 })
 
-export class login {
+export class loginService {
   constructor(private location: Location) { }
 
   // allMessagesFinal: message[] = allMessages;
@@ -21,18 +21,20 @@ export class login {
   uName = 'noadmin';
   pWord = '';
 
-//sets cookie and start counter (countMax is the time)
+  //sets cookie and start counter (countMax is the time)
   setCookie() {
     var date = new Date();
     var cookiename = "Title";
-    var timeToExpireSeconds = 40;
+    var timeToExpireSeconds = 4000;
     var cookieValue = "CookieValueeeeee";
     date.setTime(date.getTime() + (timeToExpireSeconds * 1000));
     document.cookie = cookiename + "=" + cookieValue + "; expires=" + date;
     return true;
   }
+
+  //check if counter is already counting
   checkCounter(){
-  if (this.loggedIn === true){
+    if (this.loggedIn === true){
       return false;
     } 
     else{
@@ -42,7 +44,7 @@ export class login {
   //checks if cookie is set
   checkCookie() {
     if (this.cookie === "Title=CookieValueeeeee" /* Chrome */ || this.cookie === "PHPSESSID=o1fpk2vjgsapts0epmf168ckf5; Title=CookieValueeeeee" /* Firefox */) {
-      var countMax: number = 40;
+      var countMax: number = 4000;
       function deleteAllCookies() {
         var mydate = new Date();
         mydate.setTime(mydate.getTime() - 1);
@@ -116,6 +118,11 @@ export class login {
     return null;
   }
 
+  //find user, get full user back
+  findUser(){
+    return this.findItemInObject(users, 'username', this.uName)
+  }
+  
   //Location back
   back() {
     return this.location.back();

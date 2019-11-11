@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { users } from './mock-listItems';
 import { user } from './listItem';
-import { login } from '../../services/login-cookie.service';
+import { loginService } from '../../services/login-cookie.service';
 import { Location } from '@angular/common';
 
 @Injectable({
@@ -17,7 +17,7 @@ import { Location } from '@angular/common';
 export class LoginComponent implements OnInit {
   @ViewChild('form', { static: false}) form: NgForm;
   constructor(
-    private login: login, 
+    private login: loginService, 
     private location: Location,
   ) { }
 
