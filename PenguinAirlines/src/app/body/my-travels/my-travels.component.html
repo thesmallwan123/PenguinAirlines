@@ -1,1 +1,14 @@
-<p>my-travels works!</p>
+<div class="fullPage">
+    <mat-card *ngFor="let flight of selectedFlights">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{flight.seat}}</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <div>id: {{flight.id}}</div>
+            <div>userId: {{flight.userId}}</div>
+            <div>flightId: {{flight.flightId}}</div>
+        </mat-card-content>
+    </mat-card>
+</div>
