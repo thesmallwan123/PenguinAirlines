@@ -1,6 +1,6 @@
 export class flightBooked {
     id: number;
-    flightId: number;
-    userId: number;
+    flight: object;
+    user: object;
     class: string;
 }

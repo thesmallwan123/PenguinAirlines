@@ -17,7 +17,8 @@ export class BookingService {
   //Select flights with UserID = user's ID
   flights(){
     this.selectedFlights = flightsBooked.filter(obj => {
-      return obj.userId == this.login.activeUser[0].id;
+      //obj.user.id does exist
+      return obj.user.id == this.login.activeUser[0].id;
     });
   }
 }
