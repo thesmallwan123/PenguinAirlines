@@ -1,0 +1,12 @@
+form {
+    max-width: 840px;
+    border: solid black 1px;
+    flex: 1;
+}
+
+#home-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    height: 100%;
+}

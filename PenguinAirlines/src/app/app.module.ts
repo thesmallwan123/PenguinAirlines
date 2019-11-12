@@ -1,7 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatCheckboxModule } from '@angular/material/';
+import { MatButtonModule,
+         MatCardModule,
+         MatFormFieldModule,
+         MatInputModule,
+         MatCheckboxModule,
+         MatAutocompleteModule,
+         } from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +28,6 @@ import { FlightFormComponent } from './body/flight-form/flight-form.component';
 
 @NgModule({
   declarations: [
-
     AppComponent,
     NavigationComponent,
     LoginComponent,
@@ -34,13 +39,12 @@ import { FlightFormComponent } from './body/flight-form/flight-form.component';
     MyTravelsComponent,
     CreateUserComponent,
     FlightFormComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
     FormsModule,

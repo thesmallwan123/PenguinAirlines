@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlightFormComponent implements OnInit {
 
+  flightOne: string;
+  flightTwo: string;
+
+  searchFlight() {
+    alert('Search a flight from ' + this.flightOne + ' to ' + this.flightTwo);
+  }
+
   constructor() { }
 
   ngOnInit() {
