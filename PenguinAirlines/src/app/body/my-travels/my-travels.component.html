@@ -1,14 +1,29 @@
 <div class="fullPage">
-    <mat-card *ngFor="let flight of selectedFlights">
+    <mat-card class="cardFlight mat-elevation-z8" *ngFor="let flight of selectedFlights">
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{flight.seat}}</mat-card-title>
+            <mat-card-title>To: {{flight.flight.destanation}}</mat-card-title>
+            <mat-card-subtitle>From: {{flight.flight.departure_location}}</mat-card-subtitle>
+
         </mat-card-header>
         <mat-divider></mat-divider>
         <mat-card-content>
-            <div>id: {{flight.id}}</div>
-            <div>userId: {{flight.userId}}</div>
-            <div>flightId: {{flight.flightId}}</div>
+            <div class="departure">
+                <div>Departure Date: {{flight.flight.departure_date}}</div>
+                <div>Departure Time: {{flight.flight.departure_time}}</div>
+            </div>
+                
+            <div class="arrival">
+                <div>Arrival Date</div>
+                <div>Arrival Time</div>
+            </div>  
+            <mat-divider></mat-divider>
+    
+            <div class="details">
+                <div>Class: {{flight.class}}</div>
+                <div>Seat: WhichSeat</div>
+                <div>Passengers: Idk what goes here</div>
+            </div>
         </mat-card-content>
-    </mat-card>
+    </mat-card>            
 </div>
