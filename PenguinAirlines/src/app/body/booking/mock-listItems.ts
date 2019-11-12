@@ -1,28 +1,30 @@
 import { flightBooked } from './listItem';
+import { users } from '../login/mock-listItems';
+import { flights } from '../flight-form/mock-listItems';
 
 export let flightsBooked: flightBooked[] = [
     { 
         id: 0, 
-        flightId: 0,
-        userId: 0,
+        flight: flights[0],
+        user: users[0],
         class: 'Economy',
     },
     { 
         id: 1, 
-        flightId: 0,
-        userId: 1,
+        flight: flights[1],
+        user: users[0],
         class: 'Business',
     },
     { 
         id: 2, 
-        flightId: 1,
-        userId: 0,
+        flight: flights[0],
+        user: users[1],
         class: 'Business',
     },
     { 
         id: 3, 
-        flightId: 0,
-        userId: 0,
+        flight: flights[1],
+        user: users[0],
         class: 'Economy',
     },
 ];

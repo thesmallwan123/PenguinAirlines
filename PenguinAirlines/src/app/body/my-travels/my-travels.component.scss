@@ -1,4 +1,14 @@
 .fullPage{
     width: 90%;
     margin-left: 5%;
+    .cardFlight{
+        margin-bottom: 20px;
+        margin-top: 30px;
+
+        .departure, .arrival, .details{
+            margin-left: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    }
 }
