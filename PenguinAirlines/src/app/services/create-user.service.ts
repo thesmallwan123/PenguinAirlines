@@ -48,6 +48,5 @@ export class CreateUserService {
       DOB: DOB,
     }]
     users.push(this.userAdd[0])
-    console.log(users);
   }
 }

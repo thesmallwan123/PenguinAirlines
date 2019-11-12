@@ -35,7 +35,6 @@ export class CreateUserComponent implements OnInit {
     const dateOfBirth = this.form.value.dateOfBirth;
     if(this.createUser.checkIfEmpty(username, password, passwordConfirm, email, firstName, lastName, dateOfBirth) == true){ 
       if(this.createUser.confirmPassword(password, passwordConfirm) == true){
-        console.log(true);
         this.createUser.addUser(username, password, passwordConfirm, email, firstName, lastName, dateOfBirth);
       }  
       else{

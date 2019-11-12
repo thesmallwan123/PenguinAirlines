@@ -1,14 +1,20 @@
 import { Injectable, } from '@angular/core';
 import { users } from '../body/login/mock-listItems'
 import { user } from '../body/login/listItem';
+import { activeUser } from '../body/login/activeUser';
+
 import { Location } from '@angular/common';
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class loginService {
-  constructor(private location: Location) { }
+  constructor(
+    private location: Location,
+    private router: Router,
+    ) { }
 
   // allMessagesFinal: message[] = allMessages;
 
@@ -17,9 +23,10 @@ export class loginService {
   objCol: any;
   loggedIn: boolean = false;
   users: user[] = users; 
+  activeUser: user[] = activeUser; 
 
-  uName = 'noadmin';
-  pWord = '';
+  uName;
+  pWord;
 
   //sets cookie and start counter (countMax is the time)
   setCookie() {
@@ -32,13 +39,13 @@ export class loginService {
     return true;
   }
 
-  //check if counter is already counting
-  checkCounter(){
-    if (this.loggedIn === true){
-      return false;
+  //check if a user is active
+  checkIfLogedIn(){
+    if (activeUser.length > 0){
+      return true;
     } 
     else{
-      return true
+      return false;
     }
   }
   //checks if cookie is set
@@ -80,11 +87,15 @@ export class loginService {
 
   //checks if user is admin
   checkIfAdmin() {
-    const row = this.findItemInObject(users, 'username', this.uName);
-    if (row.admin === true) {
-      return true;
+    if(this.checkIfLogedIn() == true){
+      if (activeUser[0].admin === true) {
+        return true;
+      }
+      else {
+        return false;
+      }
     }
-    else {
+    else{
       return false;
     }
   }
@@ -92,20 +103,8 @@ export class loginService {
   //sets user to loggedIn
   setLoggedIn() {
     this.objCol = users.findIndex((obj => obj.username == this.uName));
-    users[this.objCol].loggedIn = true;
+    activeUser.push(users[this.objCol])
     return true
-  }
-
-  //checks if user is loggedIn
-  checkIfLogedIn() {
-    const row = this.findItemInObject(users, 'username', this.uName);
-    this.objCol = users.findIndex((obj => obj.username == this.uName));
-    if (row.loggedIn === true) {
-      return true;
-    }
-    else {
-      return false;
-    }
   }
 
   //Finds row in array where value = imprted value
@@ -117,14 +116,14 @@ export class loginService {
     }
     return null;
   }
-
-  //find user, get full user back
-  findUser(){
-    return this.findItemInObject(users, 'username', this.uName)
-  }
   
   //Location back
   back() {
     return this.location.back();
+  }
+
+  //go to Loacation
+  goLocation(url){
+    this.router.navigate([url])
   }
 }
