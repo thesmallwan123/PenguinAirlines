@@ -4,6 +4,8 @@ import { users } from './mock-listItems';
 import { user } from './listItem';
 import { loginService } from '../../services/login-cookie.service';
 import { Location } from '@angular/common';
+;
+import { CreateAlertService } from 'src/app/services/create-alert.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private login: loginService, 
     private location: Location,
+    private alert: CreateAlertService,
   ) { }
 
 
@@ -43,11 +46,11 @@ users: user[] = users;
         this.login.back();
       }
       else {
-        alert("Please fill in the correct user credentials")
+        this.alert.addAlert('incorrectCredentials');
       } 
     }
     else {
-      alert("Already logged in")
+      this.alert.addAlert('alreadyLoggedIn');
     }
   }
 }

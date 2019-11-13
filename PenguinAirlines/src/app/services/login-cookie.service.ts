@@ -5,6 +5,7 @@ import { activeUser } from '../body/login/activeUser';
 
 import { Location } from '@angular/common';
 import { Router } from '@angular/router'
+import { CreateAlertService } from './create-alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class loginService {
   constructor(
     private location: Location,
     private router: Router,
+    private alert: CreateAlertService,
     ) { }
 
   // allMessagesFinal: message[] = allMessages;
@@ -56,7 +58,6 @@ export class loginService {
         var mydate = new Date();
         mydate.setTime(mydate.getTime() - 1);
         document.cookie = "username=; expires=" + mydate.toUTCString();
-        alert("You have been logged out. \n Please login again");
       }
       var Timer = setInterval(function () {
         countMax--;
@@ -66,6 +67,7 @@ export class loginService {
           this.mydate = this.mydate;
           deleteAllCookies();
           this.loggedIn = false;
+          alert('You have been logged out')
           location.replace("./login")
         }
       }, 1000);
