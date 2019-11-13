@@ -6,6 +6,9 @@
             <mat-label>Username:</mat-label>
             <input matInput ngModel type="text" name="username" />
         </mat-form-field>
+        
+        <mat-checkbox *ngIf="isAdmin" matInput ngModel name="admin" class="checkAdmin">Is this user an Admin?</mat-checkbox>
+        
         <mat-form-field>
             <mat-label>password:</mat-label>
             <input matInput ngModel type="password" name="password" />

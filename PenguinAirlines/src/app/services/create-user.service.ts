@@ -18,6 +18,7 @@ export class CreateUserService {
   users: user[] = users;
   userAdd: user[];
   lastId = 0;
+  isAdmin = false;
 
   //checks if an input is empty
   checkIfEmpty(uName, P1, P2, Mail, Fname, Sname, DOB){
@@ -40,11 +41,11 @@ export class CreateUserService {
   }
 
   //adds user to object users
-  addUser(uName, P1, P2, Mail, Fname, Sname, DOB){
+  addUser(uName, admin, P1, Mail, Fname, Sname, DOB,){
     this.lastId = users.length;
     this.userAdd = [{
       id: this.lastId,
-      admin: false,
+      admin: admin,
       username: uName,
       password: P1,
       email: Mail,
@@ -55,6 +56,7 @@ export class CreateUserService {
     }]
     users.push(this.userAdd[0])
     this.alert.addAlert('addedUser');
-    this.login.goLocation('./home');
+    console.log(this.userAdd)
+    this.login.goLocation('./');
   }
 }
