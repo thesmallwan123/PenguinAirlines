@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { loginService } from '../../services/login-cookie.service';
 import { BookingService } from '../../services/booking.service';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router';  
+import { CreateAlertService } from 'src/app/services/create-alert.service';
 
 @Component({
   selector: 'app-my-travels',
@@ -13,6 +14,7 @@ export class MyTravelsComponent {
   constructor(
     private login: loginService,
     private booking: BookingService,
+    private alert: CreateAlertService,
   ) { }
   cookieTrue = false;
   selectedFlights;
@@ -24,8 +26,8 @@ export class MyTravelsComponent {
       this.selectedFlights = this.booking.selectedFlights;
       console.log(this.selectedFlights)
     }
-    if(this.cookieTrue == false){
-      alert("please login first")
+    else{
+      this.alert.addAlert('firstLogin');
       this.login.goLocation('/login')
     }
   }

@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { user } from '../body/login/listItem'
 import { users } from '../body/login/mock-listItems'
 import { Location } from '@angular/common';
+import { CreateAlertService } from './create-alert.service';
+import { loginService } from './login-cookie.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateUserService {
 
-  constructor(private location: Location) { }
+  constructor(
+    private location: Location,
+    private alert: CreateAlertService,
+    private login: loginService,
+    ) { }
   users: user[] = users;
   userAdd: user[];
   lastId = 0;
@@ -29,7 +35,7 @@ export class CreateUserService {
       return true;
     }
     else{
-      console.log(P1 + " " + P2);
+      return false;
     }
   }
 
@@ -48,5 +54,7 @@ export class CreateUserService {
       DOB: DOB,
     }]
     users.push(this.userAdd[0])
+    this.alert.addAlert('addedUser');
+    this.login.goLocation('./home');
   }
 }

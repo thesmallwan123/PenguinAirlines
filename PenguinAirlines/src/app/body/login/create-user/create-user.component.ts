@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CreateUserService } from '../../../services/create-user.service';
 import { Location } from '@angular/common';
-import { loginService } from '../../../services/login-cookie.service';
+import { loginService } from '../../../services/login-cookie.service';     
+import { CreateAlertService } from 'src/app/services/create-alert.service';
 
 @Component({
   selector: 'app-create-user',
@@ -16,6 +17,7 @@ export class CreateUserComponent implements OnInit {
     private createUser: CreateUserService,
     private login: loginService,
     private location: Location,
+    private alert: CreateAlertService,
   ) { }
 
   ngOnInit() {
@@ -38,11 +40,11 @@ export class CreateUserComponent implements OnInit {
         this.createUser.addUser(username, password, passwordConfirm, email, firstName, lastName, dateOfBirth);
       }  
       else{
-        alert("Password and Confirm Password are not the same")
+        this.alert.addAlert('invalidPassword');
       }
     }
     else{
-      alert("Some fields are not filled in yet")
+      this.alert.addAlert('notFilledIn')
     }
   }
 
