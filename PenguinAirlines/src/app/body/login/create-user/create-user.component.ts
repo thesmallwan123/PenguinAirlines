@@ -21,14 +21,15 @@ export class CreateUserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.login.checkIfAdmin() == false){
-      this.login.back();
+    if(this.login.checkIfAdmin() == true){
+      this.isAdmin=true;
     }
   }
-
-  formulier = { username: '', password: '', passwordConfirm: '', email: '', firstName: '', lastName: '', dateOfBirth: '', };
+  isAdmin = false;
+  formulier = { username: '', admin: '', password: '', passwordConfirm: '', email: '', firstName: '', lastName: '', dateOfBirth: '', };
   create() {
     const username = this.form.value.username;
+    const admin = this.form.value.admin;
     const password = this.form.value.password;
     const passwordConfirm = this.form.value.passwordConfirm;
     const email = this.form.value.email;
@@ -37,7 +38,13 @@ export class CreateUserComponent implements OnInit {
     const dateOfBirth = this.form.value.dateOfBirth;
     if(this.createUser.checkIfEmpty(username, password, passwordConfirm, email, firstName, lastName, dateOfBirth) == true){ 
       if(this.createUser.confirmPassword(password, passwordConfirm) == true){
-        this.createUser.addUser(username, password, passwordConfirm, email, firstName, lastName, dateOfBirth);
+        if(admin == "" || admin == undefined){
+          const admin = false;
+          this.createUser.addUser(username, admin, password, email, firstName, lastName, dateOfBirth);
+        }
+        else{
+          this.createUser.addUser(username, admin, password, email, firstName, lastName, dateOfBirth);
+        }
       }  
       else{
         this.alert.addAlert('invalidPassword');
