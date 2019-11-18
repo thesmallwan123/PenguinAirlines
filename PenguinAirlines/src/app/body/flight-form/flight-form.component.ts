@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FlightService } from '../../services/flight.service';
 
 @Component({
   selector: 'app-flight-form',
@@ -14,9 +15,14 @@ export class FlightFormComponent implements OnInit {
     alert('Search a flight from ' + this.flightOne + ' to ' + this.flightTwo);
   }
 
-  constructor() { }
+  constructor(
+    private flights: FlightService,
+  ) { }
 
   ngOnInit() {
+    //set FlightTime
+    this.flights.flightTime();
+
   }
 
 }

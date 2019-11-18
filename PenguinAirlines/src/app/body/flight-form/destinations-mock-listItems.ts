@@ -1,4 +1,4 @@
-import { destination } from './listItem';
+import { destination } from './destinations-listItem';
 
 export let destinations: destination[] = [
     { 

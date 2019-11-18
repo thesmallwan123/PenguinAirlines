@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
-import { DestionationComponent } from './body/destionation/destionation.component';
 import { BookingComponent } from './body/booking/booking.component';
 import { MyTravelsComponent } from './body/my-travels/my-travels.component';
 import { CreateUserComponent } from './body/login/create-user/create-user.component';
@@ -26,7 +25,6 @@ import { FlightFormComponent } from './body/flight-form/flight-form.component';
     FooterComponent,
     BodyComponent,
     HeaderComponent,
-    DestionationComponent,
     BookingComponent,
     MyTravelsComponent,
     CreateUserComponent,

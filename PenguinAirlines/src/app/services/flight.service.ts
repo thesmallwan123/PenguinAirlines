@@ -1,38 +1,26 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  destination
-} from './listItem';
-import {
-  destinations
-} from './mock-listItems';
-import {
-  parse
-} from 'querystring';
-
-@Component({
-  selector: 'app-destionation',
-  templateUrl: './destionation.component.html',
-  styleUrls: ['./destionation.component.scss']
+import { Injectable } from '@angular/core';
+import { destination } from '../body/flight-form/destinations-listItem';
+import { destinations } from '../body/flight-form/destinations-mock-listItems';
+@Injectable({
+  providedIn: 'root'
 })
-export class DestionationComponent implements OnInit {
+export class FlightService {
 
-  constructor() {}
+  constructor() { }
+  
   i: 0;
-  hour;
-  minutes;
-  seconds;
   destinations1: destination[] = destinations;
-  ngOnInit() {
+
+//Sets the flightTime
+  flightTime(){
     for (this.i = 0; this.i < this.destinations1.length; this.i++) {
       parseInt(this.destinations1[this.i].flightTime[0].hour)
 
-
+      // Speed plane
       this.destinations1[this.i].flightTime[0].hour = this.destinations1[this.i].distance / 1050
+
+      //splitting data
       this.destinations1[this.i].flightTime[0].hour.toString()
-      this.hour = this.destinations1[this.i].flightTime[0].hour;
       this.destinations1[this.i].flightTime[0].hour = this.destinations1[this.i].flightTime[0].hour.toString().split(".")
 
       //Hours
