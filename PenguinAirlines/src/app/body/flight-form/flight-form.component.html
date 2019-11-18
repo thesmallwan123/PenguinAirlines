@@ -1,1 +1,36 @@
-<p>flight-form works!</p>
+<!-- dropdown filter based on https://material.angular.io/components/autocomplete/examples -->
+<div id="home-wrapper">
+<!-- Flight from -->
+<form #flightForm="ngForm" (ngSubmit)="searchFlight()">    
+    <mat-form-field hideRequiredMarker>
+        <input matInput required placeholder="Flight from" aria-label="Flight from" [matAutocomplete]="auto" [(ngModel)]="flightOne" name="flightOne">
+        <mat-autocomplete #auto="matAutocomplete">
+            <!-- Dropdown options -->
+            <!-- <mat-option *ngFor="let state of filteredStates | async" [value]="state.name"> -->
+            <mat-option>
+                TESTFLIGHT 1
+            </mat-option>
+            <mat-option>
+                TESTFLIGHT 2
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Flight to -->
+    <mat-form-field hideRequiredMarker>
+        <input matInput required placeholder="Flight to" aria-label="Flight to" [matAutocomplete]="auto" [(ngModel)]="flightTwo" name="flightTwo">
+        <mat-autocomplete #auto="matAutocomplete">
+            <!-- Dropdown options -->
+            <!-- <mat-option *ngFor="let state of filteredStates | async" [value]="state.name"> -->
+            <mat-option value="TESTFLIGHT 1">
+                TESTFLIGHT 1
+            </mat-option>
+            <mat-option value="TESTFLIGHT 2">
+                TESTFLIGHT 2
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!flightForm.valid">Search</button>
+    <button type="button" mat-raised-button color="primary" (click)="flightForm.reset()">Reset</button>
+</form>
+</div>
