@@ -2,6 +2,9 @@
     display: flex;
     flex-flow: column nowrap;
     height: 100%;
+    background-image: url('../assets/images/airplane-wing.jpg');
+    background-repeat: repeat-y;
+    background-size: cover;
 }
 
 #body-wrapper {
