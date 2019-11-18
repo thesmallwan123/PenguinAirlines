@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CreateUserService } from '../../../services/create-user.service';
 import { Location } from '@angular/common';
-import { login } from '../../../services/login-cookie.service';
+import { loginService } from '../../../services/login-cookie.service';     
+import { CreateAlertService } from 'src/app/services/create-alert.service';
 
 @Component({
   selector: 'app-create-user',
@@ -14,19 +15,21 @@ export class CreateUserComponent implements OnInit {
   @ViewChild('form', { static: false }) form: NgForm;
   constructor(
     private createUser: CreateUserService,
-    private login: login,
+    private login: loginService,
     private location: Location,
+    private alert: CreateAlertService,
   ) { }
 
   ngOnInit() {
-    if(this.login.checkIfAdmin() == false){
-      this.login.back();
+    if(this.login.checkIfAdmin() == true){
+      this.isAdmin=true;
     }
   }
-
-  formulier = { username: '', password: '', passwordConfirm: '', email: '', firstName: '', lastName: '', dateOfBirth: '', };
+  isAdmin = false;
+  formulier = { username: '', admin: '', password: '', passwordConfirm: '', email: '', firstName: '', lastName: '', dateOfBirth: '', };
   create() {
     const username = this.form.value.username;
+    const admin = this.form.value.admin;
     const password = this.form.value.password;
     const passwordConfirm = this.form.value.passwordConfirm;
     const email = this.form.value.email;
@@ -35,15 +38,20 @@ export class CreateUserComponent implements OnInit {
     const dateOfBirth = this.form.value.dateOfBirth;
     if(this.createUser.checkIfEmpty(username, password, passwordConfirm, email, firstName, lastName, dateOfBirth) == true){ 
       if(this.createUser.confirmPassword(password, passwordConfirm) == true){
-        console.log(true);
-        this.createUser.addUser(username, password, passwordConfirm, email, firstName, lastName, dateOfBirth);
+        if(admin == "" || admin == undefined){
+          const admin = false;
+          this.createUser.addUser(username, admin, password, email, firstName, lastName, dateOfBirth);
+        }
+        else{
+          this.createUser.addUser(username, admin, password, email, firstName, lastName, dateOfBirth);
+        }
       }  
       else{
-        alert("Password and Confirm Password are not the same")
+        this.alert.addAlert('invalidPassword');
       }
     }
     else{
-      alert("Some fields are not filled in yet")
+      this.alert.addAlert('notFilledIn')
     }
   }
 

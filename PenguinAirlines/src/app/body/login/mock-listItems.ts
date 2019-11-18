@@ -2,7 +2,8 @@ import { user } from './listItem';
 
 export let users: user[] = [
     { 
-        id: 0, admin: true, 
+        id: 0, 
+        admin: true, 
         username: 'admin', 
         password: 'admin', 
         email: 'ivar@waaromleefje.nl', 

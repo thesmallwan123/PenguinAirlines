@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { users } from './mock-listItems';
 import { user } from './listItem';
-import { login } from '../../services/login-cookie.service';
+import { loginService } from '../../services/login-cookie.service';
 import { Location } from '@angular/common';
+;
+import { CreateAlertService } from 'src/app/services/create-alert.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +19,9 @@ import { Location } from '@angular/common';
 export class LoginComponent implements OnInit {
   @ViewChild('form', { static: false}) form: NgForm;
   constructor(
-    private login: login, 
+    private login: loginService, 
     private location: Location,
+    private alert: CreateAlertService,
   ) { }
 
 
@@ -26,9 +29,7 @@ export class LoginComponent implements OnInit {
 cookieTrue = false;
 isAdmin = false;
   ngOnInit() {
-    this.cookieTrue = this.login.checkIfLogedIn()
     this.isAdmin = this.login.checkIfAdmin();
-
   }
 
 formulier = {username:'', password: '',};
@@ -37,7 +38,7 @@ users: user[] = users;
   loginButton(){
     const username = this.form.value.username;
     const password = this.form.value.password;
-    if (this.login.checkCounter() === true){ 
+    if (this.login.checkIfLogedIn() == false){ 
       if (this.login.checkUnamePasswd(username, password) === true){
         this.login.setLoggedIn();
         this.login.setCookie();
@@ -45,15 +46,11 @@ users: user[] = users;
         this.login.back();
       }
       else {
-        alert("Please fill in the correct user credentials")
+        this.alert.addAlert('incorrectCredentials');
       } 
     }
     else {
-      alert("Already logged in")
+      this.alert.addAlert('alreadyLoggedIn');
     }
-  }
-
-  redirectNewUser(){
-    this.location.go('./')
   }
 }

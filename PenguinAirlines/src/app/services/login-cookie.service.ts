@@ -1,14 +1,22 @@
 import { Injectable, } from '@angular/core';
 import { users } from '../body/login/mock-listItems'
 import { user } from '../body/login/listItem';
+import { activeUser } from '../body/login/activeUser';
+
 import { Location } from '@angular/common';
+import { Router } from '@angular/router'
+import { CreateAlertService } from './create-alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class login {
-  constructor(private location: Location) { }
+export class loginService {
+  constructor(
+    private location: Location,
+    private router: Router,
+    private alert: CreateAlertService,
+    ) { }
 
   // allMessagesFinal: message[] = allMessages;
 
@@ -17,37 +25,39 @@ export class login {
   objCol: any;
   loggedIn: boolean = false;
   users: user[] = users; 
+  activeUser: user[] = activeUser; 
 
-  uName = 'noadmin';
-  pWord = '';
+  uName;
+  pWord;
 
-//sets cookie and start counter (countMax is the time)
+  //sets cookie and start counter (countMax is the time)
   setCookie() {
     var date = new Date();
     var cookiename = "Title";
-    var timeToExpireSeconds = 40;
+    var timeToExpireSeconds = 4000;
     var cookieValue = "CookieValueeeeee";
     date.setTime(date.getTime() + (timeToExpireSeconds * 1000));
     document.cookie = cookiename + "=" + cookieValue + "; expires=" + date;
     return true;
   }
-  checkCounter(){
-  if (this.loggedIn === true){
-      return false;
+
+  //check if a user is active
+  checkIfLogedIn(){
+    if (activeUser.length > 0){
+      return true;
     } 
     else{
-      return true
+      return false;
     }
   }
   //checks if cookie is set
   checkCookie() {
     if (this.cookie === "Title=CookieValueeeeee" /* Chrome */ || this.cookie === "PHPSESSID=o1fpk2vjgsapts0epmf168ckf5; Title=CookieValueeeeee" /* Firefox */) {
-      var countMax: number = 40;
+      var countMax: number = 4000;
       function deleteAllCookies() {
         var mydate = new Date();
         mydate.setTime(mydate.getTime() - 1);
         document.cookie = "username=; expires=" + mydate.toUTCString();
-        alert("You have been logged out. \n Please login again");
       }
       var Timer = setInterval(function () {
         countMax--;
@@ -57,6 +67,7 @@ export class login {
           this.mydate = this.mydate;
           deleteAllCookies();
           this.loggedIn = false;
+          alert('You have been logged out')
           location.replace("./login")
         }
       }, 1000);
@@ -78,11 +89,15 @@ export class login {
 
   //checks if user is admin
   checkIfAdmin() {
-    const row = this.findItemInObject(users, 'username', this.uName);
-    if (row.admin === true) {
-      return true;
+    if(this.checkIfLogedIn() == true){
+      if (activeUser[0].admin === true) {
+        return true;
+      }
+      else {
+        return false;
+      }
     }
-    else {
+    else{
       return false;
     }
   }
@@ -90,20 +105,8 @@ export class login {
   //sets user to loggedIn
   setLoggedIn() {
     this.objCol = users.findIndex((obj => obj.username == this.uName));
-    users[this.objCol].loggedIn = true;
+    activeUser.push(users[this.objCol])
     return true
-  }
-
-  //checks if user is loggedIn
-  checkIfLogedIn() {
-    const row = this.findItemInObject(users, 'username', this.uName);
-    this.objCol = users.findIndex((obj => obj.username == this.uName));
-    if (row.loggedIn === true) {
-      return true;
-    }
-    else {
-      return false;
-    }
   }
 
   //Finds row in array where value = imprted value
@@ -115,9 +118,14 @@ export class login {
     }
     return null;
   }
-
+  
   //Location back
   back() {
     return this.location.back();
+  }
+
+  //go to Loacation
+  goLocation(url){
+    this.router.navigate([url])
   }
 }

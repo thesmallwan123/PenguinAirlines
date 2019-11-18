@@ -2,16 +2,23 @@ import { Injectable } from '@angular/core';
 import { user } from '../body/login/listItem'
 import { users } from '../body/login/mock-listItems'
 import { Location } from '@angular/common';
+import { CreateAlertService } from './create-alert.service';
+import { loginService } from './login-cookie.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateUserService {
 
-  constructor(private location: Location) { }
+  constructor(
+    private location: Location,
+    private alert: CreateAlertService,
+    private login: loginService,
+    ) { }
   users: user[] = users;
   userAdd: user[];
   lastId = 0;
+  isAdmin = false;
 
   //checks if an input is empty
   checkIfEmpty(uName, P1, P2, Mail, Fname, Sname, DOB){
@@ -29,16 +36,16 @@ export class CreateUserService {
       return true;
     }
     else{
-      console.log(P1 + " " + P2);
+      return false;
     }
   }
 
   //adds user to object users
-  addUser(uName, P1, P2, Mail, Fname, Sname, DOB){
+  addUser(uName, admin, P1, Mail, Fname, Sname, DOB,){
     this.lastId = users.length;
     this.userAdd = [{
       id: this.lastId,
-      admin: false,
+      admin: admin,
       username: uName,
       password: P1,
       email: Mail,
@@ -48,6 +55,8 @@ export class CreateUserService {
       DOB: DOB,
     }]
     users.push(this.userAdd[0])
-    console.log(users);
+    this.alert.addAlert('addedUser');
+    console.log(this.userAdd)
+    this.login.goLocation('./');
   }
 }
